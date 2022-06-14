@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using System.Data;
+
 
 
 namespace AddressBookADO
@@ -36,21 +38,21 @@ namespace AddressBookADO
                     if (dr.HasRows)
                     {
                         while (dr.Read())
-                        { 
-                             
+                        {
+
                             Model.Firstname = dr.GetString(0);
                             Model.Lastname = dr.GetString(1);
                             Model.Address = dr.GetString(2);
                             Model.City = dr.GetString(3);
                             Model.State = dr.GetString(4);
                             Model.Zip = dr.GetInt32(5);
-                          //Model.Email = dr.GetString(6);
-                            //Model.phone = dr.GetString(7);
-                            //Model.Type = dr.GetString(8);
-                          
+                            Model.Email = dr.GetString(6);
+                            Model.phone = dr.GetInt64(7);
+                            Model.Type = dr.GetString(8);
+
 
                             //display retrieve record
-                            Console.WriteLine("{0},{1},{2},{3},{4},{5}", Model.Firstname,Model.Lastname,Model.Address,Model.City,Model.State,Model.Zip);
+                            Console.WriteLine("{0},{1},{2},{3},{4},{5},{6},{7},{8}", Model.Firstname, Model.Lastname, Model.Address, Model.City, Model.State, Model.Zip, Model.Email, Model.phone,Model.Type);
                             Console.WriteLine("\n");
 
                         }
@@ -76,7 +78,5 @@ namespace AddressBookADO
             }
 
         }
-
     }
-    }
-
+}

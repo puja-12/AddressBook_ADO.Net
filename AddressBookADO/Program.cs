@@ -15,7 +15,12 @@ namespace AddressBookADO
         {
             Console.WriteLine("Hello, World!");
             AddressbookRepo repo = new AddressbookRepo();
-            repo.GetAllData();
+            AddressBookModel model = new AddressBookModel();
+           repo.GetAllData();
+
+        
+
+
         }
     }
 }
