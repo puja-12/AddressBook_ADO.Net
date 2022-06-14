@@ -16,7 +16,7 @@ namespace AddressBookADO
             AddressbookRepo repo = new AddressbookRepo();
             AddressBookModel model = new AddressBookModel();
 
-            Console.WriteLine("Select option\n1)Retrieve database\n2)Update existing data\n");
+            Console.WriteLine("Select option\n1)Retrieve database\n2)Update existing data\n3)retrieve contact by state/city");
             int option = Convert.ToInt16(Console.ReadLine());
             switch (option)
             {
@@ -38,7 +38,10 @@ namespace AddressBookADO
 
                     repo.UpdateContact(model);
                     break;
-
+                case 3:
+                    repo.GetAllContactByState();
+                    repo.GetAllContactByCity();
+                    break;
 
 
 
