@@ -13,14 +13,37 @@ namespace AddressBookADO
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
             AddressbookRepo repo = new AddressbookRepo();
             AddressBookModel model = new AddressBookModel();
-           repo.GetAllData();
 
-        
+            Console.WriteLine("Select option\n1)Retrieve database\n2)Update existing data\n");
+            int option = Convert.ToInt16(Console.ReadLine());
+            switch (option)
+            {
+                case 1:
+                    //repo.GetAllData();
+                    break;
+                case 2:
 
 
+                    model.Firstname = "Radha";
+                    model.Lastname = "Tyagi";
+                    model.Address = "Chandpur";
+                    model.City = "Bijnor";
+                    model.State = "UP";
+                    model.Zip = 567489;
+                    model.Email = "radha@gmail.com";
+                    model.phone = 7869054321;
+                    model.Type = "Friend";
+
+                    repo.UpdateContact(model);
+                    break;
+
+
+
+
+
+            }
         }
     }
 }

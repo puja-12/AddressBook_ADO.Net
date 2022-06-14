@@ -13,6 +13,7 @@ namespace AddressBookADO
     public class AddressbookRepo
     {
         SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-DMPB7U8\MSSQLSERVER01; Initial Catalog =Addressbook_system; Integrated Security = True;");
+        AddressBookModel Model = new AddressBookModel();
 
         public void GetAllData()
         {
@@ -21,7 +22,6 @@ namespace AddressBookADO
 
 
 
-                AddressBookModel Model = new AddressBookModel();
                 using (this.connection)
                 {
                     string query = @"SELECT Firstname,Lastname,Address,City,State,Zip,Email,phone,Type from Addressbook;";
@@ -78,5 +78,48 @@ namespace AddressBookADO
             }
 
         }
+      
+            public bool UpdateContact(AddressBookModel model)
+            {
+                try
+                {
+                    
+                    using (this.connection)
+                    {
+                        SqlCommand cmd = new SqlCommand("SpAddressBookUpdate", this.connection);
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@FirstName", model.Firstname);
+                        cmd.Parameters.AddWithValue("@LastName", model.Lastname);
+                        cmd.Parameters.AddWithValue("@Address", model.Address);
+                        cmd.Parameters.AddWithValue("@City", model.City);
+                        cmd.Parameters.AddWithValue("@State", model.State);
+                        cmd.Parameters.AddWithValue("@Zip", model.Zip);                
+                        cmd.Parameters.AddWithValue("@Email", model.Email);
+                        cmd.Parameters.AddWithValue("@phone", model.phone);
+                        cmd.Parameters.AddWithValue("@Type", model.Type);
+
+                    this.connection.Open();
+                        var result = cmd.ExecuteNonQuery();
+                        this.connection.Close();
+                        if (result != 0)
+                        {
+                            return true;
+                        }
+                        return false;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                finally
+                {
+                    this.connection.Close();
+                }
+                return false;
+            }
+
+
+        }
+
     }
-}
