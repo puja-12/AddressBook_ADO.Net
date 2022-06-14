@@ -16,7 +16,7 @@ namespace AddressBookADO
             AddressbookRepo repo = new AddressbookRepo();
             AddressBookModel model = new AddressBookModel();
 
-            Console.WriteLine("Select option\n1)Retrieve database\n2)Update existing data\n3)retrieve contact by state/city");
+            Console.WriteLine("Select option\n1)Retrieve database\n2)Update existing data\n3)retrieve contact by state/city\n4)Add contacts");
             int option = Convert.ToInt16(Console.ReadLine());
             switch (option)
             {
@@ -41,6 +41,19 @@ namespace AddressBookADO
                 case 3:
                     repo.GetAllContactByState();
                     repo.GetAllContactByCity();
+                    break;
+                case 4:
+
+                    model.Firstname = "Pooja";
+                    model.Lastname = "Rana";
+                    model.Address = "ABc colony";
+                    model.City = "Delhi";
+                    model.State = " NewDelhi";
+                    model.Zip = 52389;
+                    model.Email = "puja@gmail.com";
+                    model.phone = 7234504321;
+                    model.Type = "Family";
+                    repo.AddContacts(model);
                     break;
 
 

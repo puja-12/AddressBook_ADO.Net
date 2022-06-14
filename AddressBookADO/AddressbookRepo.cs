@@ -193,8 +193,48 @@ namespace AddressBookADO
             Console.WriteLine(e.Message);
         }
     }
+        public bool AddContacts(AddressBookModel model)
+        {
+            try
+            {
+                using (this.connection)
+                {
+                    SqlCommand command = new SqlCommand("SpAddressBook", this.connection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@Firstname", model.Firstname);
+
+                    command.Parameters.AddWithValue("@Lastname", model.Lastname);
+                    command.Parameters.AddWithValue("@Address", model.Address);
+                    command.Parameters.AddWithValue("@City", model.City);
+                    command.Parameters.AddWithValue("@State", model.State);
+                    command.Parameters.AddWithValue("@Zip", model.Zip);
+                    command.Parameters.AddWithValue("@Email", model.Email);
+                    command.Parameters.AddWithValue("@phone", model.phone);
+                    command.Parameters.AddWithValue("@Type", model.Type);
+
+                    this.connection.Open();
+                    var result = command.ExecuteNonQuery();
+                    this.connection.Close();
+                    if (result != 0)
+                    {
+                        return true;
+                    }
+                    return false;
+
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                this.connection.Close();
+            }
+        }
+    }
 }
-}
+
        
         
             
